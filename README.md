@@ -1,6 +1,6 @@
 # XPike.Caching
 
-[![Build Status](https://dev.azure.com/xpike/xpike/_apis/build/status/xpike-caching?branchName=master)](https://dev.azure.com/xpike/xpike/_build/latest?definitionId=8&branchName=master)
+[![Build Status](https://dev.azure.com/xpike/xpike/_apis/build/status/xpike.caching?branchName=master)](https://dev.azure.com/xpike/xpike/_build/latest?definitionId=9&branchName=master)
 ![Nuget](https://img.shields.io/nuget/v/XPike.Caching)
 
 Provides caching support for xPike.
