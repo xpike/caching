@@ -1,13 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="../common.build.props" />
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;net452</TargetFrameworks>
+    <PackageTags>xPike;microservices;caching</PackageTags>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>C:\xpike\caching\src\XPike.Caching.Redis\XPike.Caching.Redis.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DocumentationFile>C:\xpike\caching\src\XPike.Caching.Redis\XPike.Caching.Redis.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="StackExchange.Redis" Version="2.0.601" />
     <PackageReference Include="XPike.IoC" Version="1.0.3" />
-    <PackageReference Include="XPike.Redis" Version="1.0.0" />
+    <PackageReference Include="XPike.Redis" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup>
