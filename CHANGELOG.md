@@ -1,9 +1,14 @@
 # Change Log
 
+## [1.1.0]
+
+- Switched from `ISettings<T>` to `IConfig<T>`.
+- Added `ConfigureAwait(false)` calls wherever `await` is used.
+
 ## [1.0.1]
 
-Adjust NuGet packaging settings.
-Added `net452` as a target.
+- Adjust NuGet packaging settings.
+- Added `net452` as a target.
 
 ## [1.0.0]
 

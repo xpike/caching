@@ -33,5 +33,13 @@ namespace XPikeCaching.Controllers
 
             return Ok(item2);
         }
+
+        [HttpGet("retrieve")]
+        public async Task<IActionResult> RetrieveAsync()
+        {
+            var item2 = await _cachingService.GetItemAsync<RandomItem>(null, "item.123");
+
+            return Ok(item2);
+        }
     }
 }

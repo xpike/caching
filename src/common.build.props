@@ -2,7 +2,7 @@
   <PropertyGroup>
 	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <Authors>xPike contributors</Authors>
-    <PackageIcon>xpike-pacakge-icon.png</PackageIcon>
+    <PackageIcon>xpike-package-icon.png</PackageIcon>
     <Company>xPike Project</Company>
     <Copyright>MIT License, Copyright (C) 2019 - xPike contributors</Copyright>
     <PackageProjectUrl>https://xpike.github.io/</PackageProjectUrl>
@@ -12,7 +12,7 @@
     <PackageReleaseNotes>https://github.com/xpike/caching/blob/master/CHANGELOG.md</PackageReleaseNotes>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="..\..\xpike-pacakge-icon.png" Pack="true" PackagePath="\" />
+    <None Include="..\..\xpike-package-icon.png" Pack="true" PackagePath="\" />
     <None Include="..\..\LICENSE" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>

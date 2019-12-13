@@ -22,10 +22,10 @@ namespace XPike.Caching
 
         public async Task<bool> InvalidateAsync(string connectionName, string key)
         {
-            var connection = await GetProviderAsync(connectionName ?? "default");
+            var connection = await GetProviderAsync(connectionName ?? "default").ConfigureAwait(false);
 
             return (await Task.WhenAll(connection.InvalidateAsync(key),
-                    _invalidationService.SendInvalidationAsync(connectionName ?? "default", key)))
+                    _invalidationService.SendInvalidationAsync(connectionName ?? "default", key)).ConfigureAwait(false))
                 .All(x => x);
         }
 
@@ -40,24 +40,24 @@ namespace XPike.Caching
         public async Task<ICachedItem<TItem>> GetItemAsync<TItem>(string connectionName, string key, TimeSpan? timeout = null, CancellationToken? ct = null)
             where TItem : class
         {
-            var connection = await GetProviderAsync(connectionName);
-            return await connection.GetItemAsync<TItem>(key, timeout, ct);
+            var connection = await GetProviderAsync(connectionName).ConfigureAwait(false);
+            return await connection.GetItemAsync<TItem>(key, timeout, ct).ConfigureAwait(false);
         }
 
         public async Task<bool> SetItemAsync<TItem>(string connectionName, string key, ICachedItem<TItem> item, TimeSpan? timeout = null, CancellationToken? ct = null)
             where TItem : class
         {
-            var connection = await GetProviderAsync(connectionName);
+            var connection = await GetProviderAsync(connectionName).ConfigureAwait(false);
 
             return (await Task.WhenAll(connection.SetItemAsync(key, item, timeout, ct),
-                    _invalidationService.SendInvalidationAsync(connectionName ?? "default", key)))
+                    _invalidationService.SendInvalidationAsync(connectionName ?? "default", key)).ConfigureAwait(false))
                 .All(x => x);
         }
 
         public async Task<TItem> GetValueAsync<TItem>(string connectionName, string key, TimeSpan? timeout = null, CancellationToken? ct = null)
             where TItem : class
         {
-            var item = await GetItemAsync<TItem>(connectionName, key, timeout, ct);
+            var item = await GetItemAsync<TItem>(connectionName, key, timeout, ct).ConfigureAwait(false);
             var expiration = item.Timestamp.AddMilliseconds(item.ExtendedTimeToLiveMs.GetValueOrDefault(item.TimeToLiveMs));
 
             if (expiration > DateTime.UtcNow)

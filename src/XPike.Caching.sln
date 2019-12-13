@@ -21,7 +21,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{C4A6AE92
 		..\.gitignore = ..\.gitignore
 		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		common.build.props = common.build.props
-		..\xpike-pacakge-icon.png = ..\xpike-pacakge-icon.png
+		..\xpike-package-icon.png = ..\xpike-package-icon.png
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "README", "README", "{42AE3141-B10C-43DF-9591-8EDEF9894B87}"

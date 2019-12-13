@@ -2,7 +2,7 @@
 
 namespace XPike.Caching.Redis
 {
-    public class RedisCachingSettings
+    public class RedisCachingConfig
     {
         public IDictionary<string, RedisCachingConnectionSettings> Connections { get; set; }
     }

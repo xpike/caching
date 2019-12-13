@@ -28,7 +28,7 @@ namespace XPike.Caching
             if (invalidationEvent.InstanceId == _instanceId)
                 return true;
 
-            return (await Task.WhenAll(_handlers.Select(x => x(invalidationEvent)))).All(x => x);
+            return (await Task.WhenAll(_handlers.Select(x => x(invalidationEvent))).ConfigureAwait(false)).All(x => x);
         }
 
         public void AddInvalidationHandler(Func<CacheInvalidationEvent, Task<bool>> asyncHandler) =>

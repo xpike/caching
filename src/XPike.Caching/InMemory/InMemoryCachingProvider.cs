@@ -18,7 +18,7 @@ namespace XPike.Caching.InMemory
             _invalidationService = invalidationService;
             _invalidationService.AddInvalidationHandler(invalidationEvent => InvalidateAsync(invalidationEvent.Key));
 
-            Task.Run(async () => await EnforceExpirationsAsync());
+            _ = Task.Run(async () => await EnforceExpirationsAsync().ConfigureAwait(false));
         }
 
         public Task<bool> InvalidateAsync(string key)
@@ -43,8 +43,8 @@ namespace XPike.Caching.InMemory
             while (!_isDisposed)
             {
                 var remove = _items.Where(x => x.Value.IsExpired).Select(x => x.Key).ToList();
-                await Task.WhenAll(remove.Select(InvalidateAsync));
-                await Task.Delay(15000);
+                await Task.WhenAll(remove.Select(InvalidateAsync)).ConfigureAwait(false);
+                await Task.Delay(15000).ConfigureAwait(false);
             }
         }
 

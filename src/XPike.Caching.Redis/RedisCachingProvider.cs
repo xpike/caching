@@ -1,20 +1,18 @@
 ﻿using System;
-using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using StackExchange.Redis;
+using XPike.Configuration;
 using XPike.Logging;
 using XPike.Redis;
-using XPike.Settings;
-using Exception = System.Exception;
 
 namespace XPike.Caching.Redis
 {
     public class RedisCachingProvider
         : IRedisCachingProvider
     {
-        private readonly ISettings<RedisCachingSettings> _settings;
+        private readonly IConfig<RedisCachingConfig> _config;
         private readonly IRedisConnection _connection;
         private readonly ILogService _logService;
         
@@ -22,10 +20,10 @@ namespace XPike.Caching.Redis
 
         public string ConnectionName { get; }
 
-        public RedisCachingProvider(string connectionName, ISettings<RedisCachingSettings> settings, ILogService logService, IRedisConnection connection)
+        public RedisCachingProvider(string connectionName, IConfig<RedisCachingConfig> config, ILogService logService, IRedisConnection connection)
         {
             ConnectionName = connectionName;
-            _settings = settings;
+            _config = config;
             _logService = logService;
             _connection = connection;
         }
@@ -34,7 +32,7 @@ namespace XPike.Caching.Redis
         {
             try
             {
-                return await _database.KeyExpireAsync(key, DateTime.Now.Subtract(TimeSpan.FromMinutes(1)));
+                return await _database.KeyExpireAsync(key, DateTime.Now.Subtract(TimeSpan.FromMinutes(1))).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -52,7 +50,7 @@ namespace XPike.Caching.Redis
         {
             try
             {
-                return JsonConvert.DeserializeObject<CachedItem<TItem>>(await _database.StringGetAsync(key));
+                return JsonConvert.DeserializeObject<CachedItem<TItem>>(await _database.StringGetAsync(key).ConfigureAwait(false));
             }
             catch (Exception ex)
             {
@@ -71,7 +69,7 @@ namespace XPike.Caching.Redis
             try
             {
                 return await _database.StringSetAsync(key, JsonConvert.SerializeObject(item),
-                    TimeSpan.FromMilliseconds(item.ExtendedTimeToLiveMs.GetValueOrDefault(item.TimeToLiveMs)));
+                    TimeSpan.FromMilliseconds(item.ExtendedTimeToLiveMs.GetValueOrDefault(item.TimeToLiveMs))).ConfigureAwait(false);
             }
             catch (Exception ex)
             {
@@ -87,7 +85,7 @@ namespace XPike.Caching.Redis
         {
             try
             {
-                _database = await _connection.GetDatabaseAsync();
+                _database = await _connection.GetDatabaseAsync().ConfigureAwait(false);
                 _logService.Info($"Redis Cache Connection '{ConnectionName}' acquired database.");
 
                 return true;
