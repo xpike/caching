@@ -12,14 +12,15 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-    <PackageReference Include="XPike.Configuration.Microsoft.AspNetCore" Version="1.1.1" />
+    <PackageReference Include="XPike.Configuration.Microsoft.AspNetCore" Version="1.1.6" />
     <PackageReference Include="XPike.IoC.SimpleInjector.AspNetCore" Version="1.0.3" />
     <PackageReference Include="XPike.Logging.Microsoft.AspNetCore" Version="1.1.0" />
-    <PackageReference Include="XPike.Settings.AspNetCore" Version="1.1.0" />
+    <PackageReference Include="XPike.Settings.AspNetCore" Version="1.1.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\src\XPike.Caching.Redis\XPike.Caching.Redis.csproj" />
+    <ProjectReference Include="..\..\..\src\XPike.Configuration.Caching\XPike.Configuration.Caching.csproj" />
     <ProjectReference Include="..\..\Example.Library\Example.Library.csproj" />
   </ItemGroup>
 

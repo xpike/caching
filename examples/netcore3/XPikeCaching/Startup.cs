@@ -7,6 +7,7 @@ using XPike.Caching;
 using XPike.Caching.Hybrid;
 using XPike.Caching.InMemory;
 using XPike.Caching.Redis;
+using XPike.Configuration.Caching;
 using XPike.IoC.SimpleInjector.AspNetCore;
 using XPike.Logging.Microsoft.AspNetCore;
 using XPike.Settings;
@@ -34,6 +35,7 @@ namespace XPikeCaching
             services.AddXPikeDependencyInjection()
                 .AddXPikeRedisCaching()
                 .AddXPikeLogging()
+                .AddXPikeConfigurationCaching()
                 .RegisterSingleton(typeof(ISettings<>), typeof(SettingsLoader<>));
         }
 
@@ -42,6 +44,7 @@ namespace XPikeCaching
         {
             app.UseXPikeDependencyInjection()
                 .UseXPikeLogging()
+                .UseXPikeConfigurationCaching()
                 .UseXPikeCacheProvider<IHybridCachingConnectionProvider>(null)
                 .AddXPikeHybridCacheProvider<IInMemoryCachingConnectionProvider>(null)
                 .AddXPikeHybridCacheProvider<IRedisCachingConnectionProvider>(null);

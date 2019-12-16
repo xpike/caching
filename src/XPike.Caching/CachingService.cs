@@ -60,7 +60,7 @@ namespace XPike.Caching
             var item = await GetItemAsync<TItem>(connectionName, key, timeout, ct).ConfigureAwait(false);
             var expiration = item.Timestamp.AddMilliseconds(item.ExtendedTimeToLiveMs.GetValueOrDefault(item.TimeToLiveMs));
 
-            if (expiration > DateTime.UtcNow)
+            if (expiration < DateTime.UtcNow)
                 return null;
 
             return item.Value;

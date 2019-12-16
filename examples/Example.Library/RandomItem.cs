@@ -16,5 +16,13 @@ namespace Example.Library
         [DataMember]
         [ProtoMember(2)]
         public string Something { get; set; }
+
+        [DataMember]
+        [ProtoMember(3)]
+        public string ConfigValue { get; set; }
+
+        [DataMember]
+        [ProtoMember(4)]
+        public DateTime ConfigTimestamp { get; set; }
     }
 }
